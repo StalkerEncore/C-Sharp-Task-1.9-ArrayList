@@ -12,8 +12,9 @@ namespace C_Sharp_Task_1._9_ArrayList
 {
     public partial class Form1 : Form
     {
-        TicketOffice Tickets = new TicketOffice();
-        LinkedList<Ticket> SortedTickets = new LinkedList<Ticket>();
+       
+        TicketOffice tickets = new TicketOffice("text.txt");
+  
         public Form1()
         {
             InitializeComponent();
@@ -21,15 +22,18 @@ namespace C_Sharp_Task_1._9_ArrayList
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Tickets.Tickets.AddLast(new Ticket(100, 19, 02, 2000, "10.2", true, "Хлеб"));
-            Tickets.Tickets.AddLast(new Ticket(10, 1, 0, 200, "10", true, "Беб"));
+           /* Tickets.AddLast(new Ticket(100, 19, 02, 2000, "10.2", true, "Хлеб"));
+            Tickets.Tickets.AddLast(new Ticket(10, 1, 0, 200, "10", true, "Беб"));*/
             Console.WriteLine("\n лол");
-            
-            Tickets.GetFreeSeats(0, 200);
+            tickets.AddTickets(new Ticket(100, "19.02.2000", 10, true, "Хлеб"));
+            tickets.AddTickets(new Ticket(100, "15.02.2002", 10, true, "Хле2б"));
+           
 
-            foreach (Ticket ticket in Tickets.GetSortedTicket())
+            tickets.GetFreeSeatsForCost(0, 200);
+
+            foreach (Ticket ticket in tickets.GetSortedTicket())
             {
-                Console.WriteLine(ticket);
+                Console.WriteLine(ticket.Cost);
             }
         }
     }
