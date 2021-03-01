@@ -20,28 +20,42 @@ namespace C_Sharp_Task_1._9_ArrayList
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            Console.WriteLine("\n лол");/*
-            tickets.AddTickets(new Ticket(100, "19.02.2000", 10, true, "Хлеб"));
-            tickets.AddTickets(new Ticket(100, "15.02.2002", 10, true, "Хле2б"));*/
-            //tickets.GetFreeSeatsForDate("10.02.2000", "5.03.2000");
-
-            /*tickets.GetFreeSeatsForCost(100, 200);
-
-            foreach (Ticket ticket in tickets.GetSortedTicket())
-            {
-                Console.WriteLine(ticket.Cost.ToString() + " " + ticket.Date +" " + ticket.Name);
-            }*/
-        }
-
-        private void button2_Click(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e) {}
+        private void ShowTickets(object sender, EventArgs e)
         {
             textBox1.Text = string.Empty;
-            tickets.GetFreeSeatsForDate(textBox2.Text, textBox3.Text);
+            foreach (Ticket ticket in tickets.GetSortedTicket())
+            {
+                if (ticket.Vacant == "free")
+                {
+                    textBox1.Text += "\" " +  ticket.Name + "\" " + ". " + ticket.Cost + "rub. " + ticket.Date + " " + ticket.Seat + "-th seat, now is " + ticket.Vacant + Environment.NewLine;
+                }
+            }
+        }
+        private void button2_Click(object sender, EventArgs e)
+        {
+            tickets.GetFreeSeatsForDate(textBox2.Text.ToString(), textBox3.Text.ToString());
+            ShowTickets(sender, e);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            tickets.GetFreeSeatsForCost(Convert.ToInt32(textBox4.Text), Convert.ToInt32(textBox5.Text));
+            ShowTickets(sender, e);
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            tickets.GetFreeSeatsForTickets(Convert.ToInt32(textBox6.Text), Convert.ToInt32(textBox7.Text));
+            ShowTickets(sender, e);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            textBox1.Text = string.Empty;
             foreach (Ticket ticket in tickets.GetTickets())
             {
-                textBox1.Text += ticket.Cost + " " + ticket.Date + " " + ticket.Name + Environment.NewLine;
+                textBox1.Text += "\" " + ticket.Name + "\" " + ". " + ticket.Cost + "rub. " + ticket.Date + " " + ticket.Seat + "-th seat, now is " + ticket.Vacant + Environment.NewLine;
             }
         }
     }
