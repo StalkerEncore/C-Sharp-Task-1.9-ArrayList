@@ -27,11 +27,21 @@ namespace C_Sharp_Task_1._9_ArrayList
             tickets.AddTickets(new Ticket(100, "15.02.2002", 10, true, "Хле2б"));*/
             //tickets.GetFreeSeatsForDate("10.02.2000", "5.03.2000");
 
-            tickets.GetFreeSeatsForCost(100, 200);
+            /*tickets.GetFreeSeatsForCost(100, 200);
 
             foreach (Ticket ticket in tickets.GetSortedTicket())
             {
                 Console.WriteLine(ticket.Cost.ToString() + " " + ticket.Date +" " + ticket.Name);
+            }*/
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            textBox1.Text = string.Empty;
+            tickets.GetFreeSeatsForDate(textBox2.Text, textBox3.Text);
+            foreach (Ticket ticket in tickets.GetTickets())
+            {
+                textBox1.Text += ticket.Cost + " " + ticket.Date + " " + ticket.Name + Environment.NewLine;
             }
         }
     }
