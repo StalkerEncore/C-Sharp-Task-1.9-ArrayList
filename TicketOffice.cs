@@ -17,11 +17,14 @@ namespace C_Sharp_Task_1._9_ArrayList
 
         public TicketOffice(string path)
         {
-            string[] file = File.ReadAllLines(path);
-            for (int i = 0; i < file.Length; i += 3)
+            var file = new StreamReader(path);
+            while (!file.EndOfStream)
             {
-                Tickets.AddLast(new Ticket()); //TODO::Считать с файла 
+                string str = file.ReadLine();
+                string[] line = str.Split(';');
+                Tickets.AddLast(new Ticket(int.Parse(line[0]), line[1], int.Parse(line[2]), bool.Parse(line[3]), line[4]));
             }
+            file.Close();
         }
 
         public LinkedList<Ticket> GetSortedTicket() 
@@ -70,12 +73,12 @@ namespace C_Sharp_Task_1._9_ArrayList
 
             foreach (Ticket ticket in Tickets)
             {
-                if (IsInDates(date1, ticket.Date, date2)) SortedTickets.AddLast(ticket); 
+                if (CheckDate(date1, ticket.Date, date2)) SortedTickets.AddLast(ticket); 
             }
 
         }
 
-        public static bool IsInDates(string date1, string checkDate, string date2)
+        public static bool CheckDate(string date1, string checkDate, string date2)
         {
             string[] arrdate1 = date1.Split('.');
             string[] arrcheckDate = checkDate.Split('.');
@@ -88,27 +91,5 @@ namespace C_Sharp_Task_1._9_ArrayList
             return d1 <= dCD && dCD <= d2;
 
         }
-
-        /*public void GetFreeSeats(string min_dd, string min_mm, string min_yy, string max)
-           {
-               foreach (var ticket in Tickets)
-               {
-                   if (ticket.Date <= max && ticket.Cost >= min)
-                   {
-
-                   }
-               }
-           }*/
-        /*public void GetFreeSeats(int min, int max)
-        {
-            foreach (var ticket in Tickets)
-            {
-                if (ticket.Cost <= max && ticket.Cost >= min)
-                {
-
-                }
-            }
-        }*/
-
     }
 }

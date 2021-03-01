@@ -3,11 +3,11 @@
     class Ticket
     {
      
-        public Ticket(int cost, string Date, int Site, bool Vacant, string Name)
+        public Ticket(int cost, string Date, int Seat, bool Vacant, string Name)
         {
             this.Date = Date; 
             this.Cost = cost;
-            this.Site = Site;
+            this.Site = Seat;
             this.Vacant = Vacant;
             this.Name = Name;
         }
